@@ -22,7 +22,7 @@ nfl-4th-down-win-probability/
 │   ├── 01_cleaning_eda/
 │   │   └── 01_4th_down_data_cleaning.ipynb
 │   ├── 02_feature_engineering/
-│   │   └── 02_4th_down_feature_engineering_eda.ipynb
+│   │   └── 02_4th_down_engineering2.ipynb
 │   └── 03_modeling/
 │       └── 03_4th_down_modeling.ipynb
 ├── models/            # Trained model artifacts (optional, may be git-ignored)
@@ -32,9 +32,9 @@ nfl-4th-down-win-probability/
 └── README.md
 ```
 
-- Cleaning & EDA notebooks live in `notebooks/01_cleaning_eda`.
-- Feature engineering & EDA live in `notebooks/02_feature_engineering`.
-- Modeling and evaluation live in `notebooks/03_modeling`.
+- Cleaning & EDA notebooks live in `notebooks/cleaning_eda`.
+- Feature engineering & EDA live in `notebooks/feature_engineering`.
+- Modeling and evaluation live in `notebooks/modeling`.
 
 ---
 
