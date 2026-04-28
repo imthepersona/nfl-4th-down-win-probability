@@ -29,7 +29,6 @@ Supporting project materials are organized across the repository, including:
 - Data files and data dictionaries in `data/`.
 - Analysis notebooks in `notebooks/`, including the subfolders `cleaning_eda/`, `feature_engineering/`, and `modeling/`.
 - Saved model artifacts in `models/`.
-- Supporting documentation in `references/` and `docs/`.
 - Supporting documents (reports and key visuals) in the `reports/` and `visualizations/` directories.
 
 ## Methods Summary
