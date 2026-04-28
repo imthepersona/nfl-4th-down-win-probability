@@ -23,8 +23,6 @@ The central question behind this project is:
 
 This project uses NFL play-by-play data sourced from Kaggle:
 
-- [NFL Play by Play 2009-2016](https://www.kaggle.com/datasets/maxhorowitz/nflplaybyplay2009to2016)
-
 Supporting project materials are organized across the repository, including:
 - Data files and data dictionaries in `data/`.
 - Analysis notebooks in `notebooks/`, including the subfolders `cleaning_eda/`, `feature_engineering/`, and `modeling/`.

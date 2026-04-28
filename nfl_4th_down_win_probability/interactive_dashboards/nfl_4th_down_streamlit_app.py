@@ -1,0 +1,141 @@
+import streamlit as st
+import pandas as pd
+
+st.set_page_config(page_title="NFL 4th Down Decision Tool", page_icon="🏈", layout="wide")
+
+st.markdown("""
+<style>
+.block-container {padding-top: 2rem; padding-bottom: 2rem;}
+.metric-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 1rem;
+}
+.small-note {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+</style>
+""", unsafe_allow_html=True)
+
+if "page" not in st.session_state:
+    st.session_state.page = "NFL 4th Down"
+
+with st.sidebar:
+    st.title("Portfolio App")
+    st.caption("Interactive analytics showcase")
+    page = st.radio(
+        "Navigate",
+        ["Home", "NFL 4th Down", "Project 2 (Coming Soon)", "About"],
+        index=["Home", "NFL 4th Down", "Project 2 (Coming Soon)", "About"].index(st.session_state.page)
+        if st.session_state.page in ["Home", "NFL 4th Down", "Project 2 (Coming Soon)", "About"] else 1
+    )
+    st.session_state.page = page
+    st.divider()
+    st.markdown("**Tech stack**")
+    st.write("Streamlit, Python, Pandas")
+    st.markdown("**Project repo**")
+    st.markdown("[GitHub Project](https://github.com/imthepersona/nfl-4th-down-win-probability)")
+
+if page == "Home":
+    st.title("Will Escalante | Data Analytics Portfolio")
+    st.subheader("Interactive project showcase built with Streamlit")
+    st.write(
+        "This app is designed to present analytics projects as interactive case studies instead of static dashboards. "
+        "Start with the NFL 4th Down project in the sidebar."
+    )
+
+    c1, c2 = st.columns(2)
+    with c1:
+        st.markdown("### Featured now")
+        st.info("NFL 4th Down Win Probability Decision Tool")
+    with c2:
+        st.markdown("### Next to add")
+        st.warning("Project 2 placeholder")
+
+elif page == "NFL 4th Down":
+    st.title("🏈 NFL 4th Down Decision Tool")
+    st.subheader("Interactive case study for 4th-down strategy and decision modeling")
+
+    st.write(
+        "This project analyzes NFL 4th-down situations and helps estimate whether the best decision is to punt, "
+        "attempt a field goal, or go for it based on game context."
+    )
+
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Punt Rate", "60.8%")
+    m2.metric("Field Goal Rate", "22.8%")
+    m3.metric("Go For It Rate", "16.4%")
+
+    st.markdown("### Scenario Explorer")
+    a, b, c, d = st.columns(4)
+    with a:
+        quarter = st.selectbox("Quarter", [1, 2, 3, 4, "OT"])
+    with b:
+        yards_to_go = st.slider("Yards to Go", 1, 15, 3)
+    with c:
+        yard_line = st.slider("Yard Line", 1, 99, 45)
+    with d:
+        score_diff = st.slider("Score Differential", -21, 21, 0)
+
+    def simple_recommendation(q, ytg, yl, diff):
+        if yl >= 60 and ytg <= 3:
+            return "Go For It", "Short distance in plus territory favors aggression."
+        if yl >= 70 and ytg <= 7:
+            return "Field Goal", "Close enough for a realistic field goal attempt in many situations."
+        if ytg >= 8 and yl <= 55:
+            return "Punt", "Long distance with weaker field position usually favors field position strategy."
+        if q == 4 and diff < 0 and yl >= 55:
+            return "Go For It", "Late-game trailing situations often justify a more aggressive choice."
+        return "Punt", "Default placeholder logic until model predictions are connected."
+
+    recommendation, rationale = simple_recommendation(quarter, yards_to_go, yard_line, score_diff)
+
+    st.markdown("### Recommended Decision")
+    st.success(f"**{recommendation}**")
+    st.write(rationale)
+    st.caption("Current recommendation uses placeholder logic. Replace this with your trained model or lookup table.")
+
+    st.markdown("### Important Insight")
+    st.info(
+        "Most coaches take a conservative approach on 4th down: about 60.8% of situations result in a punt, "
+        "while only 16.4% end in a go-for-it attempt."
+    )
+
+    st.markdown("### Visuals")
+    st.write(
+        "Add your Tableau heatmap export or recommendation matrix screenshot here with `st.image()` once you save the files "
+        "inside your project folder."
+    )
+
+    example_df = pd.DataFrame({
+        "Decision": ["Punt", "Field Goal", "Go For It"],
+        "Rate": [60.8, 22.8, 16.4]
+    })
+    st.bar_chart(example_df.set_index("Decision"))
+
+    with st.expander("Suggested next upgrades"):
+        st.markdown("""
+- Replace placeholder logic with model inference.
+- Add win probability delta output.
+- Add embedded project visuals.
+- Add a downloadable project summary.
+- Add a second featured project page.
+""")
+
+elif page == "Project 2 (Coming Soon)":
+    st.title("Project 2")
+    st.write("This section is reserved for your next portfolio project.")
+    st.caption("Good options: Employee Attrition, Heart Disease, or Automatidata.")
+
+else:
+    st.title("About")
+    st.write(
+        "I’m Will Escalante, a data analytics professional building portfolio projects across sports analytics, "
+        "machine learning, and business-focused data storytelling."
+    )
+    st.write(
+        "This Streamlit app is meant to turn portfolio projects into interactive experiences that recruiters, clients, "
+        "and hiring managers can explore."
+    )
