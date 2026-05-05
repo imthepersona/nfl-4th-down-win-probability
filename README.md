@@ -147,6 +147,39 @@ python load_nfl_to_azure.py
 
 Update environment variables, credentials, and connection settings before running this script.
 
+## Streamlit App
+
+This project includes a Streamlit app that turns the NFL 4th-down analysis into an interactive decision-support demo.
+
+### What the app does
+- Lets users select quarter, yards to go, yard line, and score differential.
+- Builds a pre-snap feature row that matches the trained model input structure.
+- Uses a saved multi-class XGBoost model to estimate the best 4th-down decision.
+- Shows the top recommendation and probability breakdown for Punt, Field Goal, and Go For It.
+- Includes historical context and supporting visualizations.
+
+### Run locally
+From the project root:
+
+```bash
+python3 -m streamlit run nfl_4th_down_streamlit_app_v3.py
+```
+
+### Deployment
+This app is designed for Streamlit Community Cloud deployment.
+
+Required files:
+- `nfl_4th_down_streamlit_app_v3.py`
+- `requirements.txt`
+- `models/xgb_4th_down_decision_balanced.pkl`
+- `visualizations/images/field_position_distance_heatmap.png`
+
+### Live app
+Add your deployed app URL here once published.
+
+Example:
+`https://your-app-name.streamlit.app`
+
 ## Contributing
 
 Contributions are welcome.
