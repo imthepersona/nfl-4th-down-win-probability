@@ -14,4 +14,4 @@ scikit-learn
 streamlit
 tqdm
 typer
--e .
+
